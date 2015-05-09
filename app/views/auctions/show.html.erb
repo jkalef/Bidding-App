@@ -1,0 +1,41 @@
+<div class="container">
+
+  <h2><%= @auction.title %></h2>
+  <p>Details: <%= @auction.details %></p>
+  <p>Reserved Price<%= @auction.reserved_price %></p>
+  <p>Current Price: $<%= @current_price %></p>
+
+  <% if @auction.published? %>
+    <% if can? :manage, @auction %>
+      <%= link_to "Reserve Price Met?", auction_close_auction_index_path(@auction), method: :post, class: "btn btn-danger" %> 
+    <% end %>
+  <% end %>
+
+  <% if @auction.reserve_met? %>
+    <h3>Sorry, this auction's reserve price has been met.</h3>
+    <p>No More Bids Will Be Accepted</p>
+  <% else %>
+    <%# create a bid %>
+      <% if cannot? :manage, @auction %>
+        <h3>Create A Bid</h3>
+        <%= simple_form_for @bid, url: auction_bids_path(@auction), remote: true do |f| %>
+          <%= f.input :price, class: "form-control" %>
+          <br>
+          <%= f.submit "Create Bid", class: "btn btn-success" %>
+        <% end %>
+      <% else %>
+        <p>Sorry..you can't bid on your own acutions</p>
+      <% end %>
+  <% end %>
+
+
+  <% if @auction.bids.any? %>
+    <p>Bids:</p> 
+    <div class="bids">
+      <% @bids.each do |bid| %>
+                    <%= render partial: "/bids/bids", locals: {bid: bid} %>
+               <% end %>
+    </div>
+  <% end %>
+
+</div>

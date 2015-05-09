@@ -1,0 +1,22 @@
+<div class="sign-in-sign-up-forms">
+  <div class="col-sm-12 col-md-6 col-md-offset-3">
+    <div class="form-group">
+      <h1>Welcome To Bidd.R!</h1>
+      <p>Please create your account to login.</p>
+      <br>
+      <%= simple_form_for @user do |f| %>
+        <%= f.text_field :username, class: "form-control input-lg", placeholder: "Username" %>
+        <br>
+        <%= f.text_field :email, class: "form-control input-lg", placeholder: "Email" %>
+        <br>
+        <%= f.password_field :password, class: "form-control input-lg", placeholder: "Password" %>
+        <br>
+        <%= f.password_field :password, class: "form-control input-lg", placeholder: "Confirm Password" %>
+        <br>
+        <%= f.submit "Create Account", class: "btn btn-success btn-centered" %>
+      <% end %>
+      <br>
+      <%= link_to "Already made an account?", new_session_path %>
+    <div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<h1>Viewing Auctions and Bids for <%= @user.username %></h1>
+
+<% @user.bids.each do |bid| %>
+  <div class="well">
+    <strong>Auction Name:</strong> <%= bid.auction.title %>
+    <br> 
+    <strong>Bid:</strong> <%= bid.price %>
+  </div>
+<% end %>

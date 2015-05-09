@@ -1,0 +1,17 @@
+<div class="container">
+  <h1>Welcome To Biddr</h1>
+  <% @auctions.each do |auction| %>
+    <div class="well">
+      <p>Title: <%= link_to auction.title, auction %></p>
+      <p>Details: <%= auction.details %></p>
+      <% if auction.ends_on %>
+        <p>Ends On: <%= auction.ends_on %></p>
+      <% end %>
+      <% if auction.bids.any? %>
+        <p>Current Price: $<%= auction.bids.highest_bid_so_far + 1 %></p>
+      <% else %>
+        <p>Current Price: No Bids Yet!</p>
+      <% end %>
+    </div>
+  <% end %>
+</div>
